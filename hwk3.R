@@ -29,3 +29,17 @@ ggplot(data = total_northa_emissions, aes(x = Entity, y = billion_tons, fill = E
   labs(x = "Country", y= expression(Total~Emissions~"("*Billion~Tons~of~CO[2]*")"))
 
 countries <- data.frame(country = unique(emissions$Entity))
+length = length(countries$country)
+chosen <- countries$country[sample(1:length, 4, replace = TRUE)]
+
+chosen_emissions <- subset(emissions, emissions$Entity %in% chosen)
+chosen_emissions <- chosen_emissions %>%
+  mutate(log_c02 = log(c02), million_tons = c02/1000000)
+ggplot(data = chosen_emissions, aes(x = Year, y = million_tons, color = Entity)) +
+  geom_point()+
+  geom_line()+
+  labs(y= expression(Yearly~Emissions~"("*Million~Tons~of~CO[2]*")"))+ 
+  scale_color_brewer(palette=c("red", 'blue', 'green', 'yellow'))
+chosen_emissions <- chosen_emissions %>%
+  group_by(Entity)
+cum <- data.frame(cum = cumsum(chosen_emissions$c02))
