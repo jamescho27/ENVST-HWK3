@@ -61,9 +61,7 @@ world_emissions <- emissions %>%
   summarise(sum(c02))
 
 
-
 colnames(world_emissions) <- c("Year", "Total_C02")
-
 world_emissions <- mutate(world_emissions, ten_million_tons = Total_C02 / 10000000)
 
 emissions_plot <- ggplot(data = world_emissions, aes(x = Year, y = ten_million_tons))+
