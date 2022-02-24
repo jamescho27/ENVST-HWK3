@@ -78,7 +78,7 @@ emissions_plot + anomaly_plot
 
 ozone = read.csv("mfe-ozone-hole-19792016-CSV/ozone-hole-19792016.csv")
 colnames(ozone) <- c("year", "ozone_hole_area", "ozone_concentration")
-coeff <- 20
+coeff <- 10
 area_color <- "#718099"
 concentration_color <- "#349dba"
 ggplot(data = ozone, aes(x = year))+
